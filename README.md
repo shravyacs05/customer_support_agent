@@ -238,6 +238,5 @@ Demo video / GIF demonstrating:
 3. Multi-turn conversation handling
 4. Safe abstention and human escalation recommendation
 5. Automated evaluation suite execution (20/20 PASS)
-
-*(Link your demo recording file or upload below)*
+ Demo videos: https://drive.google.com/drive/folders/1MQJDj9NbUAhH48nCtFFjz5qsqs3Tn1i0?usp=sharing
 `demo.mp4` / `demo.gif`
