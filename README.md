@@ -239,4 +239,3 @@ Demo video / GIF demonstrating:
 4. Safe abstention and human escalation recommendation
 5. Automated evaluation suite execution (20/20 PASS)
  Demo videos: https://drive.google.com/drive/folders/1MQJDj9NbUAhH48nCtFFjz5qsqs3Tn1i0?usp=sharing
-`demo.mp4` / `demo.gif`
