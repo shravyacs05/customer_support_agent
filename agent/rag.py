@@ -1,27 +1,4 @@
-"""
-agent/rag.py — Phase 1: RAG Indexer and Retriever
-
-Responsibilities:
-  1. Parse all 14 Markdown files from knowledge-base/, extracting YAML front
-     matter as structured metadata.
-  2. Chunk each document by its H2/H3 headings, keeping metadata attached to
-     every chunk so the retriever can filter and rank by authority.
-  3. Embed chunks with OpenAI text-embedding-3-small and store them in a
-     persistent ChromaDB collection.
-  4. Retrieve the top-K most relevant chunks for a query, applying document-
-     authority rules:
-       - Exclude  audience=internal  documents from customer answers.
-       - Deprioritize  status=superseded  and  status=draft  documents.
-       - Prefer  policy_authority=official  and  status=active  documents.
-  5. Detect genuine conflicts between two *active + official* sources so the
-     agent can surface them instead of silently picking one.
-
-Usage:
-    from agent.rag import build_index, retrieve
-
-    build_index()          # Run once (or when docs change). Persists to disk.
-    chunks = retrieve("What is the return window?")
-"""
+"""Knowledge-base RAG indexer and authority-aware retriever using ChromaDB."""
 
 from __future__ import annotations
 

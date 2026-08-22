@@ -1,22 +1,4 @@
-"""
-agent/agent.py — Phase 3: Core Support Agent with Multi-turn RAG & Function Calling
-
-Connects:
-  - Gemini 2.0 Flash (or configured LLM) via google-generativeai
-  - Authority-aware RAG retrieval from agent/rag.py
-  - Sanitized order lookup tool from agent/order_tool.py
-  - System prompt & security rules from agent/prompts.py
-  - Multi-turn conversation session state management
-
-Usage:
-    from agent.agent import SupportAgent
-
-    agent = SupportAgent()
-    response = agent.chat("How long does a customer have to return an unused backpack?")
-    print(response.answer)
-    print("Sources:", response.sources)
-    print("Handoff:", response.handoff)
-"""
+"""Core support agent integrating knowledge-base RAG, tool calling, and session state."""
 
 from __future__ import annotations
 

@@ -1,21 +1,4 @@
-"""
-agent/order_tool.py — Phase 2: Order Lookup Tool
-
-Responsibilities:
-  1. Load and query data/orders.json deterministically.
-  2. Normalize user input (strip whitespace, lowercase-to-uppercase, punctuation).
-  3. Enforce strict Privacy Filters (NEVER expose email, address, internal notes, risk scores).
-  4. Enforce Status Precedence & Stale Field Sanitization:
-       - If status == 'cancelled' or 'returned', strip stale carrier, tracking, and ETA fields.
-       - If status == 'shipped' but estimated_delivery is None, accurately indicate ETA is unavailable.
-       - If status == 'exception', mark requires_human_handoff = True.
-  5. Provide a safe JSON output schema suitable for tool use in LLM prompts.
-
-Usage:
-    from agent.order_tool import lookup_order, ORDER_TOOL_DECLARATION
-
-    result = lookup_order("ord-1007")
-"""
+"""Order status lookup tool with input normalization and privacy sanitization."""
 
 from __future__ import annotations
 

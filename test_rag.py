@@ -1,22 +1,4 @@
-"""
-test_rag.py — Sanity checks for Phase 1 (RAG indexer + retrieval)
-
-Run with:
-    python test_rag.py
-
-This script does NOT require pytest. It prints pass/fail for each check so
-you can confirm the index is working correctly before building the agent.
-
-Checks:
-  1. All 14 documents parse without errors.
-  2. The internal document (doc 14) is excluded from the index.
-  3. The legacy/superseded document (doc 02) is excluded from normal retrieval.
-  4. "What is the return window?" retrieves doc 01 as the top result.
-  5. "Canada shipping" retrieves doc 06.
-  6. "TrailPlus return window" retrieves doc 09.
-  7. "Breeze Tumbler dishwasher" retrieves BOTH doc 11 and doc 12 (conflict pair).
-  8. Privacy-sensitive content from doc 14 is NOT in any retrieved chunk.
-"""
+"""Tests for RAG document parsing, authority filtering, and vector retrieval."""
 
 import logging
 import os
@@ -134,7 +116,7 @@ def _print_summary():
     print(f"\n{'─'*52}")
     print(f"  Results: {passed}/{total} passed, {failed} failed")
     if failed == 0:
-        print("  All checks passed -- Phase 1 is ready!")
+        print("  All RAG checks passed successfully.")
     else:
         print("  Some checks failed -- see details above.")
     print(f"{'─'*52}\n")

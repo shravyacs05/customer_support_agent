@@ -1,12 +1,4 @@
-"""
-evaluation/run_eval.py — Automated Benchmark Evaluation Suite for Aster & Row Agent
 
-Runs all 20 behavior-level test cases (15 visible cases + 5 original edge cases).
-
-Usage:
-    python evaluation/run_eval.py
-    python evaluation/run_eval.py --cases evaluation/visible-cases.json
-"""
 
 import argparse
 import json
@@ -119,7 +111,7 @@ def check_assertions(case: dict[str, Any], final_response: Any, last_user_turn: 
 
 
 def run_evaluation(cases_file: Path):
-    """Execute all cases in benchmark file and print structured report."""
+    """Execute all benchmark cases and print a categorized report."""
     if not cases_file.exists():
         print(f"Error: Cases file not found at {cases_file}")
         sys.exit(1)
@@ -129,7 +121,7 @@ def run_evaluation(cases_file: Path):
 
     cases = data.get("cases", [])
     print("\n" + "=" * 70)
-    print("  🧪 Aster & Row AI Agent — Evaluation Suite")
+    print("  Aster & Row AI Agent — Evaluation Suite")
     print(f"  Benchmark file: {cases_file.name} ({len(cases)} test cases)")
     print("=" * 70 + "\n")
 
@@ -152,7 +144,7 @@ def run_evaluation(cases_file: Path):
             if turn.get("role") == "user":
                 last_user_msg = turn.get("content", "")
                 final_response = agent.chat(last_user_msg)
-                time.sleep(1.0)  # Gentle spacing between turns
+                time.sleep(1.0)
 
         # Check assertions
         passed, failures = check_assertions(case, final_response, last_user_msg)
@@ -169,13 +161,13 @@ def run_evaluation(cases_file: Path):
             "answer": final_response.answer if final_response else "",
         })
 
-        status_badge = PASS_BADGE if passed else FAIL_BADGE
-        print(f"  [{idx:02d}/{len(cases):02d}] {status_badge}  {case_id:<32} ({category})", flush=True)
+        status_badge = "[PASS]" if passed else "[FAIL]"
+        print(f"  [{idx:02d}/{len(cases):02d}] {status_badge:<6}  {case_id:<32} ({category})", flush=True)
         if not passed:
             for reason in failures:
                 print(f"         ↳ ❌ {reason}", flush=True)
 
-        time.sleep(4.0)  # 4s spacing keeps request rate at 12 RPM (< 15 RPM free tier limit)
+        time.sleep(4.0)
 
     elapsed = time.time() - start_time
     total_cases = len(cases)
@@ -185,16 +177,16 @@ def run_evaluation(cases_file: Path):
 
     # Summary table
     print("\n" + "=" * 70)
-    print(f"  📊 CATEGORIZED EVALUATION SUMMARY ({elapsed:.1f}s)")
+    print(f"  Evaluation Summary ({elapsed:.1f}s)")
     print("=" * 70)
     print(f"  {'Category':<26} {'Passed':<10} {'Total':<10} {'Pass Rate':<10}")
-    print("  " + "─" * 60)
+    print("  " + "-" * 60)
 
     for cat, stats in sorted(category_stats.items()):
         rate = (stats["passed"] / stats["total"]) * 100 if stats["total"] > 0 else 0
         print(f"  {cat:<26} {stats['passed']:<10} {stats['total']:<10} {rate:>5.1f}%")
 
-    print("  " + "─" * 60)
+    print("  " + "-" * 60)
     print(f"  {'OVERALL':<26} {total_passed:<10} {total_cases:<10} {overall_rate:>5.1f}%\n")
     print(f"  Final Score: {total_passed}/{total_cases} test cases passed ({overall_rate:.1f}%)")
     print("=" * 70 + "\n")

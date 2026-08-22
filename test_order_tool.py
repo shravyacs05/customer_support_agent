@@ -1,19 +1,4 @@
-"""
-test_order_tool.py — Sanity and edge case checks for Phase 2 (Order Lookup Tool)
-
-Run with:
-    python test_order_tool.py
-
-Checks:
-  1. Valid lookup: ORD-1007 returns shipped, UPS, 2026-08-22, Atlas Weekender.
-  2. Input normalization: ' ord-1007. ' and '#ord-1007' resolve to ORD-1007.
-  3. Privacy protection: ORD-1007 does NOT contain customer email, address, name, internal notes, or risk score.
-  4. Stale ETA suppression: ORD-1004 (cancelled) has ETA and carrier stripped to None.
-  5. Shipped without ETA: ORD-1011 returns shipped with Canada Post and estimated_delivery=None.
-  6. Unknown order: ORD-9999 returns found=False and requires_human_handoff=True.
-  7. Missing order ID: None or '' returns found=False without crashing.
-  8. Operational exception: ORD-1010 (exception status) marks requires_human_handoff=True.
-"""
+"""Tests for order lookup tool normalization, status handling, and privacy filters."""
 
 import json
 import logging
@@ -117,7 +102,7 @@ failed = total - passed
 print(f"\n{'─'*52}")
 print(f"  Results: {passed}/{total} passed, {failed} failed")
 if failed == 0:
-    print("  All checks passed -- Phase 2 is ready!")
+    print("  All order tool checks passed successfully.")
 else:
     print("  Some checks failed -- see details above.")
 print(f"{'─'*52}\n")

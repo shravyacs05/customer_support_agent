@@ -1,9 +1,4 @@
-"""
-test_agent.py — End-to-End verification of Phase 3 (Agent Core & Multi-turn RAG)
-
-Run with:
-    python test_agent.py
-"""
+"""Integration tests for agent multi-turn conversation and tool calling."""
 
 import logging
 import sys
@@ -96,7 +91,7 @@ failed = total - passed
 print(f"\n{'─'*52}")
 print(f"  Results: {passed}/{total} passed, {failed} failed")
 if failed == 0:
-    print("  All checks passed -- Phase 3 is ready!")
+    print("  All agent checks passed successfully.")
 else:
     print("  Some checks failed -- see details above.")
 print(f"{'─'*52}\n")
